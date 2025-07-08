@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-Yantra Lab Automation System | Swayam Kamble</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/space.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/chatbot.css">
+    <link rel="stylesheet" href="css/lightbox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="images/fav_icon.png" rel="icon" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        nav i {
+            outline: none;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        #visit {
+            color: var(--primary-color);
+        }
+
+        body {
+            background-color: black;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            height: 250px;
+            flex-wrap: wrap;
+            color: white;
+        }
+
+        .container h3 {
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .container h1 {
+            font-size: 3.5rem;
+            padding-top: 0;
+        }
+
+        .award-badge {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .award-badge i {
+            margin-right: 5px;
+        }
+
+        /* Responsive image styles */
+        .project-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container {
+            width: 90%;
+            max-width: 800px;
+            margin: 30px auto;
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .project-details {
+            color: white;
+            text-align: left;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .project-details h2 {
+            font-size: 2rem;
+            margin: 30px 0 15px 0;
+            color: var(--primary-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .project-details h3 {
+            font-size: 1.5rem;
+            margin: 20px 0 10px 0;
+            color: var(--primary-color-light);
+        }
+
+        .project-details ul, .project-details ol {
+            margin: 15px 0 20px 0;
+            padding-left: 25px;
+        }
+
+        .project-details li {
+            margin-bottom: 10px;
+        }
+
+        /* Text justification */
+        .project-details p,
+        .project-details li p {
+            text-align: justify;
+            hyphens: auto;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .feature-list li {
+            position: relative;
+            padding-left: 28px;
+            list-style-type: none;
+        }
+
+        .feature-list li:before {
+            content: "🔹";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .tech-item {
+            background-color: rgba(106, 13, 173, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--primary-color);
+            font-size: 0.9rem;
+            color: #f0f0f0;
+        }
+
+        .image-gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .image-gallery img {
+            width: calc(33.333% - 15px);
+            min-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .side-by-side-images {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .side-by-side-images img {
+            width: calc(50% - 20px);
+            min-width: 280px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+
+        .dark-mode .project-details {
+            color: #333;
+        }
+
+        .dark-mode .project-details h2 {
+            border-bottom-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .tech-item {
+            background-color: rgba(106, 13, 173, 0.1);
+            color: #333;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container h1 {
+                font-size: 2.2rem;
+                padding: 0 15px;
+            }
+
+            .project-details {
+                width: 90%;
+                padding: 0 10px;
+            }
+
+            .project-details h2 {
+                font-size: 1.6rem;
+                margin-top: 25px;
+            }
+
+            .project-details h3 {
+                font-size: 1.3rem;
+            }
+
+            .project-details p,
+            .project-details li {
+                font-size: 0.95rem;
+            }
+
+            .tech-stack {
+                justify-content: center;
+            }
+
+            .side-by-side-images img,
+            .image-gallery img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+      <a href="index.html">
+        <img src="images/logggg.png" class="logo" alt="Swayam Kamble Logo">
+      </a>
+      <ul id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="Resume.html">Portfolio</a></li>
+        <li><a href="projects.html" id="visit">Projects</a></li>
+        <li><a href="getintouch.html">Contact</a></li>
+      </ul>
+      
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </nav>
+
+    <div class="container">
+        <h1 style="color: var(--primary-color);">e-Yantra Lab Automation System</h1>
+        <div class="award-badge">
+            <i class="fas fa-trophy"></i> 1st Place – eLSI Hackathon, IIT Bombay
+        </div>
+    </div>
+
+    <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/5ff515OfanM?si=jVqH7eTH9tLwOMeB&start=120" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <div class="project-details">
+        <h2>Introduction</h2>
+        <p>The e-Yantra Lab Automation System is an AI and IoT-based smart automation solution developed for the eLSI Hackathon organized by e-Yantra, IIT Bombay. Created under the theme "Automate Your e-Yantra Lab", the system aims to modernize traditional lab environments by introducing intelligent control, energy efficiency, and secure access mechanisms. Competing against more than 520 colleges across India, our team secured 1st place, earning national-level recognition for innovation in smart infrastructure and embedded systems.</p>
+
+        <!-- <div class="project-image-container">
+            <img src="images/eyantra_overview.jpg" alt="e-Yantra Lab Automation System Overview" class="project-image">
+        </div> -->
+
+        <h2>Project Motivation</h2>
+        <p>Technical laboratories in educational institutions often suffer from excessive energy usage due to unattended equipment and lack of centralized control. Moreover, ensuring security and tracking attendance can be challenging in open-access environments. This project addresses those challenges by building a fully automated lab using real-time computer vision, secure authentication systems, and multi-platform IoT control. The goal was to design a lab that responds intelligently to human presence and access needs while reducing manual intervention and energy consumption.</p>
+
+        <h2>System Overview</h2>
+        <p>At the heart of the system is a vision-based automation mechanism powered by OpenCV. A ceiling-mounted wide-angle camera constantly monitors the lab and identifies which zones are occupied. Based on the presence of individuals, the system automatically turns lights and fans ON or OFF using ESP32 microcontrollers and relay modules. This ensures appliances operate only when necessary, significantly reducing power wastage.</p>
+
+        <p>The system also integrates a facial recognition module for access control. Only registered users can unlock the smart door—either through face recognition or using a secure mobile PIN. This dual-layer security mechanism makes the lab both smart and secure.</p>
+
+        <!-- <div class="side-by-side-images">
+            <img src="images/eyantra_vision.jpg" alt="Computer Vision System" class="side-image">
+            <img src="images/eyantra_access.jpg" alt="Access Control System" class="side-image">
+        </div> -->
+
+        <h2>Key Features</h2>
+        <ul class="feature-list">
+            <li><strong>Smart Energy Management:</strong> Vision-based system automatically controls lights and fans based on occupancy detection, reducing energy waste.</li>
+            <li><strong>Dual-Layer Security:</strong> Facial recognition and mobile PIN authentication for secure lab access.</li>
+            <li><strong>Multiple Control Interfaces:</strong> Custom Android app, Node-RED dashboard, Google Assistant, and Amazon Alexa integration.</li>
+            <li><strong>Attendance Tracking:</strong> Automated attendance logging using facial recognition for data analysis and trend monitoring.</li>
+            <li><strong>Real-Time Monitoring:</strong> Live dashboard for lab status, occupancy, and device control.</li>
+        </ul>
+
+        <h2>Technical Architecture</h2>
+        <p>The system is built using a combination of hardware and software technologies. Hardware components include ESP32, relay modules, wide-angle cameras, and smart locks. On the software side, it uses Python and OpenCV for computer vision, Node-RED for real-time dashboard and control logic, and Android Studio for the mobile app. Voice assistant support is handled via Sinric Pro, providing seamless integration with smart home ecosystems.</p>
+
+        <p>Communication between modules is done wirelessly over Wi-Fi, and device logic is programmed to react dynamically to changing conditions in the lab. The system supports real-time updates, ensuring fast and reliable performance across all control modes.</p>
+
+        <h3>Technology Stack</h3>
+        <div class="tech-stack">
+            <span class="tech-item">Python</span>
+            <span class="tech-item">OpenCV</span>
+            <span class="tech-item">ESP32</span>
+            <span class="tech-item">Node-RED</span>
+            <span class="tech-item">Android Studio</span>
+            <span class="tech-item">Sinric Pro</span>
+            <span class="tech-item">Google Assistant</span>
+            <span class="tech-item">Amazon Alexa</span>
+            <span class="tech-item">Facial Recognition</span>
+            <span class="tech-item">IoT</span>
+        </div>
+
+        <h2>My Contribution</h2>
+        <p>As the Lead Developer for IoT and Vision Integration, I was responsible for setting up the camera system, developing the person detection scripts in Python, and ensuring reliable communication with the ESP32 devices. I also handled the integration between vision-based triggers and physical device actuation, as well as assisted in developing the mobile app and dashboard. I collaborated with teammates Dnyandev Sawarkar, Parth Talmale, and Nehesh Sawarkar under the mentorship of Mr. Rohan Vaidya, our college's e-Yantra lab coordinator.</p>
+
+        <h2>Impact and Recognition</h2>
+        <p>This project was recognized as the winning entry at the eLSI Hackathon 2024, hosted by IIT Bombay, placing 1st among over 520 participating colleges nationwide. As part of the reward, our team was invited to the e-Yantra Symposium, where we attended expert talks and workshops on emerging technologies in AI and robotics. Listening to Dr. Kavi Arya, the founder of e-Yantra, was a particularly inspiring moment, as it aligned with our vision of using technology to solve real-world challenges.</p>
+
+        <p>The system demonstrates how embedded systems, AI, and IoT can be fused to build scalable solutions for institutions. It not only automates energy management but also introduces smart security, seamless user control, and attendance tracking, making it ideal for modern labs and classrooms.</p>
+
+        <div class="image-gallery">
+            <img src="images/group_photo.JPG" alt="Award Ceremony" class="gallery-image">
+            <img src="images/team.JPG" alt="Team Photo" class="gallery-image">
+            <img src="images/trophy.jpg" alt="Trophy" class="gallery-image">
+            <img src="images/Eyantra Hackathon.jpg" alt="Certificate" class="gallery-image">
+        </div>
+
+        <h2>Future Enhancements</h2>
+        <p>To improve security and scalability, we plan to integrate multi-factor authentication using RFID cards and fingerprint sensors. We also envision adding real-time alerts through SMS or email notifications for unauthorized access attempts. Further development will include cloud-based dashboards for remote lab management and analytics tools to analyze usage patterns, optimize energy use, and generate attendance reports.</p>
+
+        <h2>Conclusion</h2>
+        <p>The e-Yantra Lab Automation System stands as a successful application of AI and IoT in real-world infrastructure. It reflects how cross-disciplinary knowledge in embedded systems, computer vision, and cloud technologies can be used to build intelligent, energy-efficient, and secure environments. Winning 1st place at the prestigious eLSI Hackathon by IIT Bombay not only validated the project's technical strength but also fueled our drive to continue innovating in the smart automation space.</p>
+    </div>
+
+    <!-- Chat Bot Interface -->
+    <div class="chat-container">
+      <div id="chat-icon">
+        <i class="fas fa-comment"></i>
+      </div>
+
+      <div id="chat-window" class="hidden">
+        <div class="chat-header">
+          <h3>Swayam's Assistant</h3>
+          <button id="chat-close"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div id="chat-messages"></div>
+
+        <div class="chat-input">
+          <input type="text" id="message-input" placeholder="Type your message...">
+          <button id="send-button"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/space-background.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/lightbox.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            
+            menuToggle.addEventListener('click', function() {
+                menuToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            });
+            
+            // Close menu when clicking on a link
+            const navLinks = document.querySelectorAll('#nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+        });
+        
+        function myFunction() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+        }
+    </script>
+</body>
+</html>

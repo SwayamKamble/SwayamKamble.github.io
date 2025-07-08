@@ -8,6 +8,9 @@
     <title>Contact | Swayam Kamble</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/space.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/chatbot.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -399,6 +402,42 @@
             color: #555;
         }
 
+        /* Privacy checkbox styling */
+        .privacy-consent {
+            margin: 15px 0;
+            display: flex;
+            align-items: flex-start;
+            line-height: 1.4;
+        }
+
+        .privacy-consent input[type="checkbox"] {
+            margin: 3px 10px 0 0;
+            width: auto;
+            min-width: auto;
+            height: auto;
+        }
+
+        .privacy-consent label {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .privacy-consent a {
+            color: var(--primary-color-light);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--primary-color-light);
+            transition: all 0.3s ease;
+        }
+
+        .privacy-consent a:hover {
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--primary-color);
+        }
+
+        .dark-mode .privacy-consent label {
+            color: #666;
+        }
+
         @media screen and (max-width: 768px) {
             .contact-content {
                 flex-direction: column;
@@ -424,21 +463,26 @@
 
 <body>
     <nav>
+      <a href="index.html">
         <img src="images/logggg.png" class="logo" alt="Swayam Kamble Logo">
-        <ul id="x">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="Resume.html">Portfolio</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="#" id="visit">Contact</a></li>
-        </ul>
-        <img src="images/theme_sun.png" class="favico1" alt="Light Theme">
-        <img src="images/theme_moon.png" class="favico2" alt="Dark Theme">
-        <label class="switch" aria-label="Toggle Dark Mode">
-            <input type="checkbox" onclick="myFunction()">
-            <span class="slider round"></span>
-        </label>
+      </a>
+      <ul id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="Resume.html">Portfolio</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="#" id="visit">Contact</a></li>
+      </ul>
+      
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
     </nav>
+
     <a href="#" class="icon" onclick="myfun()" aria-label="Open Menu">
         <i id="bar" class="fa-sharp fa-solid fa-bars"></i>
     </a>
@@ -459,6 +503,14 @@
                     <input type="email" name="email" id="email" placeholder="Email" required>
                     <input type="text" placeholder="Subject" id="sub" name="subject" required>
                     <textarea name="msg" id="msg" placeholder="Your Message" required></textarea>
+                    
+                    <div class="privacy-consent">
+                        <input type="checkbox" id="privacy-checkbox" name="privacy-consent" required>
+                        <label for="privacy-checkbox">
+                            I agree to the processing of my data as outlined in the <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.
+                        </label>
+                    </div>
+                    
                     <button type="submit">Send Message</button>
                 </form>
             </div>
@@ -494,7 +546,7 @@
                     <i class="fab fa-linkedin"></i>
                     <div class="info-content">
                         <h3>LinkedIn</h3>
-                        <p><a href="http://www.linkedin.com/in/swayam-kamble-a536a0290" target="_blank">Swayam Kamble</a>
+                        <p><a href="http://www.linkedin.com/in/swayam-kamble-a536a0290" target="_blank">swayam-kamble-a536a0290</a>
                         </p>
                     </div>
                 </div>
@@ -502,8 +554,37 @@
         </div>
     </div>
 
+    <!-- Chat Bot Interface -->
+    <div class="chat-container">
+      <div id="chat-icon">
+        <i class="fas fa-comment"></i>
+      </div>
+
+      <div id="chat-window" class="hidden">
+        <div class="chat-header">
+          <h3>Swayam's Assistant</h3>
+          <button id="chat-close"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div id="chat-messages"></div>
+
+        <div class="chat-input">
+          <input type="text" id="message-input" placeholder="Type your message...">
+          <button id="send-button"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/space-background.js"></script>
+    <script src="js/chatbot.js"></script>
     <script>
         function submitForm() {
+            // Check if privacy checkbox is checked
+            if (!document.getElementById('privacy-checkbox').checked) {
+                alert("Please agree to the privacy policy before sending your message.");
+                return;
+            }
+            
             var formData = new FormData(document.getElementById('contactForm'));
 
             fetch('https://script.google.com/macros/s/AKfycbyPXC7WTG2e9wnQ4PQLHyjp_-zOYFTEC3YfjQTnIM5KG3csl6JW4UULwZ4WscRQkMkO/exec', {
@@ -535,6 +616,27 @@
             x.style.display = "none";
         }
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            
+            menuToggle.addEventListener('click', function() {
+                menuToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            });
+            
+            // Close menu when clicking on a link
+            const navLinks = document.querySelectorAll('#nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+        });
+        
         function myFunction() {
             var element = document.body;
             element.classList.toggle("dark-mode");

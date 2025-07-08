@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIITH Internship - Smart Water Level Monitoring | Swayam Kamble</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/space.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/chatbot.css">
+    <link rel="stylesheet" href="css/lightbox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="images/fav_icon.png" rel="icon" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        nav i {
+            outline: none;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        #visit {
+            color: var(--primary-color);
+        }
+
+        body {
+            background-color: black;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            height: 250px;
+            flex-wrap: wrap;
+            color: white;
+        }
+
+        .container h3 {
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .container h1 {
+            font-size: 3.5rem;
+            padding-top: 0;
+        }
+
+        .internship-badge {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .internship-badge i {
+            margin-right: 5px;
+        }
+
+        /* Responsive image styles */
+        .project-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container {
+            width: 90%;
+            max-width: 800px;
+            margin: 30px auto;
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .project-details {
+            color: white;
+            text-align: left;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .project-details h2 {
+            font-size: 2rem;
+            margin: 30px 0 15px 0;
+            color: var(--primary-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .project-details h3 {
+            font-size: 1.5rem;
+            margin: 20px 0 10px 0;
+            color: var(--primary-color-light);
+        }
+
+        .project-details ul, .project-details ol {
+            margin: 15px 0 20px 0;
+            padding-left: 25px;
+        }
+
+        .project-details li {
+            margin-bottom: 10px;
+        }
+
+        /* Text justification */
+        .project-details p,
+        .project-details li p {
+            text-align: justify;
+            hyphens: auto;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .feature-list li {
+            position: relative;
+            padding-left: 28px;
+            list-style-type: none;
+        }
+
+        .feature-list li:before {
+            content: "🔹";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .checkmark-list li {
+            position: relative;
+            padding-left: 28px;
+            list-style-type: none;
+        }
+
+        .checkmark-list li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .workflow-list li {
+            position: relative;
+            padding-left: 28px;
+            list-style-type: none;
+        }
+
+        .workflow-list li:before {
+            content: "🔁";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .tech-item {
+            background-color: rgba(106, 13, 173, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--primary-color);
+            font-size: 0.9rem;
+            color: #f0f0f0;
+        }
+
+        .image-gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .image-gallery img {
+            width: calc(33.333% - 15px);
+            min-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .side-by-side-images {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .side-by-side-images img {
+            width: calc(50% - 20px);
+            min-width: 280px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+
+        .dark-mode .project-details {
+            color: #333;
+        }
+
+        .dark-mode .project-details h2 {
+            border-bottom-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .tech-item {
+            background-color: rgba(106, 13, 173, 0.1);
+            color: #333;
+        }
+
+        .mentor-box {
+            background-color: rgba(106, 13, 173, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .mentor-box p {
+            margin: 5px 0;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container h1 {
+                font-size: 2.2rem;
+                padding: 0 15px;
+            }
+
+            .project-details {
+                width: 90%;
+                padding: 0 10px;
+            }
+
+            .project-details h2 {
+                font-size: 1.6rem;
+                margin-top: 25px;
+            }
+
+            .project-details h3 {
+                font-size: 1.3rem;
+            }
+
+            .project-details p,
+            .project-details li {
+                font-size: 0.95rem;
+            }
+
+            .tech-stack {
+                justify-content: center;
+            }
+
+            .side-by-side-images img,
+            .image-gallery img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+      <a href="index.html">
+        <img src="images/logggg.png" class="logo" alt="Swayam Kamble Logo">
+      </a>
+      <ul id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="Resume.html">Portfolio</a></li>
+        <li><a href="projects.html" id="visit">Projects</a></li>
+        <li><a href="getintouch.html">Contact</a></li>
+      </ul>
+      
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </nav>
+
+    <div class="container">
+        <h1 style="color: var(--primary-color);">IoT-Based Smart Water Level Monitoring System</h1>
+        <div class="internship-badge">
+            <i class="fas fa-briefcase"></i> Internship at SPCRC – IIIT Hyderabad
+        </div>
+    </div>
+
+    <div class="project-details">
+        <div class="mentor-box">
+            <p><strong>Mentor:</strong> Dr. Sachin Chaudhari</p>
+            <p><strong>Domain Experts:</strong> Ritik Yelekar, Sahil Padole, Tanmay Bhatt</p>
+            <p><strong>Internship Period:</strong> 25 June 2024 – 2 August 2024</p>
+        </div>
+
+        <h2>Introduction</h2>
+        <p>During my internship at the Signal Processing and Communications Research Center (SPCRC) at the International Institute of Information Technology, Hyderabad (IIITH), I worked on the development and deployment of a real-time IoT-based Smart Water Level Monitoring System. The project was executed under the guidance of Dr. Sachin Chaudhari and in collaboration with research mentors from the Water Lab. The system was intended to monitor water levels in overhead tanks across the IIITH campus, optimize water usage, and provide actionable insights for water resource management. It combined ultrasonic sensing, temperature compensation, GSM communication, and cloud analytics to create a robust, real-world smart infrastructure solution.</p>
+
+        <!-- <div class="project-image-container">
+            <img src="images/iiith_water_monitoring.jpg" alt="IIITH Water Level Monitoring System" class="project-image">
+        </div> -->
+
+        <h2>Project Overview</h2>
+        <p>The initial system was designed around the ESP32 microcontroller, a JSN-SR04T waterproof ultrasonic sensor, and a DS18B20 temperature sensor. These sensors worked in tandem to ensure temperature-compensated distance measurements. The data was transmitted to ThingSpeak using a SIM800L GSM module, where real-time graphs and analytics were visualized.</p>
+
+        <p>This system aimed to accurately detect refill and consumption patterns, identify anomalies, and assist in automated decision-making for water management. Over time, collected data was also preprocessed and analyzed using MATLAB to smooth trends and detect unusual behavior, paving the way for future machine learning-based anomaly detection.</p>
+
+        <div class="tech-stack">
+            <span class="tech-item">ESP32</span>
+            <span class="tech-item">JSN-SR04T</span>
+            <span class="tech-item">DS18B20</span>
+            <span class="tech-item">SIM800L GSM</span>
+            <span class="tech-item">ThingSpeak</span>
+           
+            <span class="tech-item">IoT</span>
+            <span class="tech-item">Data Analytics</span>
+        </div>
+
+        <h2>Technical Components and Methodology</h2>
+        <p>The system operated on a 2-minute cycle that involved:</p>
+
+        <ul class="feature-list">
+            <li><strong>Ultrasonic and Temperature-Based Measurements:</strong> The JSN-SR04T sensor calculated the distance to the water surface, and the DS18B20 provided temperature readings to adjust the speed of sound, improving measurement accuracy in variable environmental conditions.</li>
+            <li><strong>Data Processing and Transmission:</strong> The ESP32 calculated the water level by subtracting the measured distance from the known tank depth. Volume was estimated using tank dimensions. The processed data was then transmitted to ThingSpeak via the GSM module.</li>
+            <li><strong>Visualization and Analysis:</strong> The ThingSpeak platform hosted multiple data fields including temperature, raw and compensated distances, and calculated volume. Graph smoothing, rolling averages, and level-to-volume conversions helped clearly distinguish filling events and consumption patterns.</li>
+        </ul>
+
+        <div class="side-by-side-images">
+            <img src="images/version_1_node.jpg" alt="version1" class="side-image">
+            <img src="images/version_2_node.jpg" alt="version2" class="side-image">
+        </div>
+
+        <h2>Challenges and Solutions in Initial Version</h2>
+        <p>One of the key issues faced during the initial deployment was intermittent GSM connectivity, which occasionally resulted in data loss. In response to this, a new version of the node was proposed and implemented with enhanced logging and fault-tolerant features.</p>
+        <div class="side-by-side-images">
+            <img src="images/before.jpg" alt="before version 2" class="side-image">
+            <img src="images/after.jpg" alt="after version 2" class="side-image">
+        </div>
+        <h2>Enhanced Version: Reliable Data Logging and Transmission Node</h2>
+        <p>To address GSM reliability issues and ensure uninterrupted data logging, we developed an improved system incorporating an RTC (DS3231) for accurate timekeeping and an SD card module for local storage.</p>
+
+        <h3>Key Enhancements</h3>
+        <ul class="checkmark-list">
+            <li><strong>RTC Module (DS3231):</strong> Ensures precise timestamps for every measurement cycle.</li>
+            <li><strong>SD Card Storage:</strong> All sensor readings are logged to a CSV file ("datalog.csv") for offline access.</li>
+            <li><strong>Failure-Resistant Communication:</strong> In the event of GSM failure, data is stored in a separate CSV file ("gsm_offline_data.csv").</li>
+            <li><strong>Automatic Retry and Deletion:</strong> On the next cycle, the system attempts to resend offline data and deletes successful entries to optimize storage.</li>
+        </ul>
+
+        <h3>Enhanced Workflow</h3>
+        <ul class="workflow-list">
+            <li><strong>Time Synchronization:</strong> System retrieves the current time from RTC.</li>
+            <li><strong>Measurement:</strong> Captures water level and temperature data.</li>
+            <li><strong>Logging:</strong> Saves data locally with a timestamp.</li>
+            <li><strong>Transmission:</strong> Sends data to ThingSpeak. If it fails, logs it to an offline file.</li>
+            <li><strong>Retry Mechanism:</strong> Continuously retries failed transmissions in future cycles.</li>
+            <li><strong>Storage Management:</strong> Deletes successfully sent data to prevent file overflow.</li>
+        </ul>
+
+        <h2>Features and Advantages</h2>
+        <ul class="feature-list">
+            <li><strong>High Reliability:</strong> No data loss due to transmission failure.</li>
+            <li><strong>Timestamp Accuracy:</strong> RTC ensures correct chronological logging.</li>
+            <li><strong>Efficient Storage:</strong> Automated file cleanup prevents storage overload.</li>
+            <li><strong>Scalability:</strong> Design is modular and can be replicated in large-scale infrastructure.</li>
+        </ul>
+
+        <h2>Outcome and Learning Experience</h2>
+        <p>Through this internship, I gained invaluable hands-on experience with embedded systems, sensor integration, wireless communication, and data engineering. I worked on solving real-world challenges such as sensor inaccuracies, network unreliability, and cloud connectivity limitations, which deepened my understanding of IoT system design and deployment. The improved version of the system ensured not only real-time monitoring but also fail-safe operation, contributing directly to IIITH's smart infrastructure goals.</p>
+
+        <h2>Acknowledgements</h2>
+        <p>I am extremely grateful to Dr. Sachin Chaudhari for providing the opportunity to work on this impactful project and for his continuous guidance throughout the internship. I also sincerely thank Ritik Yelekar, Sahil Padole, and Tanmay Bhatt for their support and mentorship, which played a key role in shaping the technical and analytical aspects of the work.</p>
+
+        <h2>Conclusion</h2>
+        <p>The IoT-Based Smart Water Level Monitoring System at IIIT Hyderabad demonstrates how low-cost hardware, robust programming, and intelligent data handling can come together to create effective solutions for real-world problems. The enhancements made in the new version ensured data integrity, resilience, and operational continuity—making it an ideal candidate for deployment in broader smart city water management applications. This internship has been a pivotal milestone in my journey, enriching my skills in both engineering and research.</p>
+        
+        <h2>Project Gallery</h2>
+        <div class="image-gallery">
+            <img src="images/image_iiith_1.jpg" alt="iith images" class="gallery-image">
+            <img src="images/image_iiith_2.jpg" alt="iith images" class="gallery-image">
+            <img src="images/image_iiith_3.jpg" alt="iith images" class="gallery-image">
+            <img src="images/image_iiith_4.jpg" alt="iith images" class="gallery-image">
+            <img src="images/image_iiith_5.jpg" alt="iith images" class="gallery-image">    
+            <img src="images/image_iiith_6.jpg" alt="iith images" class="gallery-image">
+        </div>
+    </div>
+
+    <!-- Chat Bot Interface -->
+    <div class="chat-container">
+      <div id="chat-icon">
+        <i class="fas fa-comment"></i>
+      </div>
+
+      <div id="chat-window" class="hidden">
+        <div class="chat-header">
+          <h3>Swayam's Assistant</h3>
+          <button id="chat-close"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div id="chat-messages"></div>
+
+        <div class="chat-input">
+          <input type="text" id="message-input" placeholder="Type your message...">
+          <button id="send-button"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/space-background.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/lightbox.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            
+            menuToggle.addEventListener('click', function() {
+                menuToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            });
+            
+            // Close menu when clicking on a link
+            const navLinks = document.querySelectorAll('#nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+        });
+        
+        function myFunction() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+        }
+    </script>
+</body>
+</html>

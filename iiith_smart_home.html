@@ -8,11 +8,14 @@
     <title>Smart Home Environmental Monitoring System</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/space.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/chatbot.css">
+    <link rel="stylesheet" href="css/lightbox.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="images/fav_icon.png" rel="icon" type="image/png">
-    <link rel="stylesheet" href="css/lightbox.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
@@ -277,20 +280,24 @@
 
 <body>
     <nav>
-        <img src="images/logggg.png" class="logo">
-        <ul id="x">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="Resume.html">Portfolio</a></li>
-            <li><a href="projects.html" id="visit">Projects</a></li>
-            <li><a href="getintouch.html">Contact</a></li>
-        </ul>
-        <img src="images/theme_sun.png" class="favico1">
-        <img src="images/theme_moon.png" class="favico2">
-        <label class="switch">
-            <input type="checkbox" onclick="myFunction()">
-            <span class="slider round"></span>
-        </label>
+      <a href="index.html">
+        <img src="images/logggg.png" class="logo" alt="Swayam Kamble Logo">
+      </a>
+      <ul id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="Resume.html">Portfolio</a></li>
+        <li><a href="projects.html" id="visit">Projects</a></li>
+        <li><a href="getintouch.html">Contact</a></li>
+      </ul>
+      
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
     </nav>
     <div class="container">
         <h1 style="color: var(--primary-color);">Smart Home Environmental Monitoring System </h1>
@@ -620,34 +627,56 @@
         </h3>
     </div>
 
-    <a href="#" class="icon" onclick="myfun()" aria-label="Open Menu"> 
-        <i id="bar" class="fa-sharp fa-solid fa-bars"></i> 
-    </a>
-    <a href="#" class="icon" onclick="closefunc()" aria-label="Close Menu"> 
-        <i id="bar2" class="fa-solid fa-xmark"></i> 
-    </a>
+    <!-- Clean Chat Bot Interface -->
+    <div class="chat-container">
+      <div id="chat-icon">
+        <i class="fas fa-comment"></i>
+      </div>
 
+      <div id="chat-window" class="hidden">
+        <div class="chat-header">
+          <h3>Swayam's Assistant</h3>
+          <button id="chat-close"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div id="chat-messages"></div>
+
+        <div class="chat-input">
+          <input type="text" id="message-input" placeholder="Type your message...">
+          <button id="send-button"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/space-background.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/lightbox.js"></script>
     <script>
-        function myfun() {
-            var x = document.getElementById("x");
-            document.getElementById("bar2").style.display = "block";
-            document.getElementById("bar").style.display = "none";
-            x.style.display = "flex";
-        }
-        
-        function closefunc() {
-            var x = document.getElementById("x");
-            document.getElementById("bar").style.display = "block";
-            document.getElementById("bar2").style.display = "none";
-            x.style.display = "none";
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            
+            menuToggle.addEventListener('click', function() {
+                menuToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            });
+            
+            // Close menu when clicking on a link
+            const navLinks = document.querySelectorAll('#nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+        });
         
         function myFunction() {
             var element = document.body;
             element.classList.toggle("dark-mode");
         }
     </script>
-    <script src="js/lightbox.js"></script>
 </body>
-
 </html>

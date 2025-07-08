@@ -27,12 +27,6 @@
   --hover-shadow: 0 6px 12px rgba(106, 13, 173, 0.3);
 }
 
-/* Dark mode overrides */
-.dark-mode {
-  --bg-current: var(--bg-light);
-  --text-current: var(--text-dark);
-}
-
 /* Common theme-related styles */
 .highlight, 
 #visit, 
@@ -68,14 +62,6 @@ nav ul li a:after,
   background: transparent;
   border-color: var(--primary-color);
   color: var(--primary-color);
-}
-
-input:checked + .slider {
-  background-color: var(--primary-color);
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px var(--primary-color);
 }
 
 .boxes details:hover {

@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="css/theme.css">
   <link rel="stylesheet" href="css/space.css">
+  <link rel="stylesheet" href="css/chatbot.css">
+  <link rel="stylesheet" href="css/navbar.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
 
   <style>
@@ -20,6 +22,15 @@
       right: 10%;
       max-width: 300px;
       height: auto;
+    }
+
+    .content p {
+      color: white;
+      width: 55%;
+      margin-top: 25px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      text-align: justify;
     }
 
     @keyframes floatAndRotate {
@@ -64,37 +75,37 @@
   </style>
 </head>
 
-<body>
+<body class="index-page">
   <div class="hero">
     <nav>
-      <img src="images/logggg.png" class="logo" alt="Swayam Kamble Logo">
-      <ul id="x">
+      <a href="index.html">
+        <img src="images/logggg.png" class="logo" alt="Swayam Kamble Logo">
+      </a>
+      <ul id="nav-menu">
         <li><a href="#" id="visit">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="Resume.html">Portfolio</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="getintouch.html">Contact</a></li>
       </ul>
-      <img src="images/theme_sun.png" class="favico1" alt="Light Theme">
-      <img src="images/theme_moon.png" class="favico2" alt="Dark Theme">
-      <label class="switch" aria-label="Toggle Dark Mode">
-        <input type="checkbox" onclick="myFunction()">
-        <span class="slider round"></span>
-      </label>
+
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
     </nav>
-    <a href="#" class="icon" onclick="myfun()" aria-label="Open Menu">
-      <i id="bar" class="fa-sharp fa-solid fa-bars"></i>
-    </a>
-    <a href="#" class="icon" onclick="closefunc()" aria-label="Close Menu">
-      <i id="bar2" class="fa-solid fa-xmark"></i>
-    </a>
 
     <div class="content">
       <h1>Hello,&nbsp;I'm <span class="hover-underline-animation name">Swayam</span></h1>
-      <p>I'm an engineering student specializing in Industrial IoT, passionate about integrating technology and
-        problem-solving. With hands-on experience in IoT projects and electronics, I enjoy creating smart solutions for
-        real-world challenges.</p>
-      <a href="pdf/Swayam Anil Kamble cv_version2.pdf" target="_blank" class="btn">Download CV</a>
+      <p>I'm an engineering student specializing in Industrial IoT, with a strong passion for integrating technology, AI, and problem-solving to create smart and impactful solutions.
+
+With hands-on experience in IoT systems, embedded development, and AI integration, I've built projects ranging from home automation and security systems to AI-powered lab solutions.
+
+Actively involved in the WiSE and e-Yantra Labs, and a national winner of the 2024 eLSI Hackathon, I'm driven by a mission to develop innovative technologies that address real-world challenges.</p>
+      <a href="pdf\resume.pdf" target="_blank" class="btn">Download CV</a>
       <img class="programming-image" src="images/Firmware-amico.png" alt="Programming Illustration" width="300"
         height="300">
     </div>
@@ -115,32 +126,79 @@
     </div>
   </div>
 
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>&copy; 2025 Swayam Kamble. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="getintouch.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Chat Bot Interface -->
+  <div class="chat-container">
+    <div id="chat-icon">
+      <i class="fas fa-comment"></i>
+    </div>
+
+    <div id="chat-window" class="hidden">
+      <div class="chat-header">
+        <h3>Swayam's Assistant</h3>
+        <button id="chat-close"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div id="chat-messages"></div>
+
+      <div class="chat-input">
+        <input type="text" id="message-input" placeholder="Type your message...">
+        <button id="send-button"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/space-background.js"></script>
+  <script src="js/chatbot.js"></script>
   <script>
-    function myfun() {
-      var x = document.getElementById("x");
-      document.getElementById("bar2").style.display = "block";
-      document.getElementById("bar").style.display = "none";
-      x.style.display = "flex";
-    }
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navMenu = document.getElementById('nav-menu');
 
-    function closefunc() {
-      var x = document.getElementById("x");
-      document.getElementById("bar").style.display = "block";
-      document.getElementById("bar2").style.display = "none";
-      x.style.display = "none";
-    }
+      menuToggle.addEventListener('click', function () {
+        menuToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+      });
 
-    function myFunction() {
-      var element = document.body;
-      element.classList.toggle("dark-mode");
-    }
+      // Close menu when clicking on a link
+      const navLinks = document.querySelectorAll('#nav-menu a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function () {
+          menuToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+          document.body.classList.remove('menu-open');
+        });
+      });
+
+      // Signal to the space background that this is the index page
+      document.body.classList.add('index-page');
+
+      // Add some random star glows for enhanced effect
+      for (let i = 0; i < 5; i++) {
+        const starGlow = document.createElement('div');
+        starGlow.className = 'star-glow';
+        starGlow.style.width = (30 + Math.random() * 50) + 'px';
+        starGlow.style.height = starGlow.style.width;
+        starGlow.style.left = Math.random() * window.innerWidth + 'px';
+        starGlow.style.top = Math.random() * window.innerHeight + 'px';
+        starGlow.style.animationDelay = (Math.random() * 2) + 's';
+        document.body.appendChild(starGlow);
+      }
+    });
   </script>
 </body>
 
-<!-- </html>
-      element.classList.toggle("dark-mode");
-    }
-  </script>
-</body> -->
 

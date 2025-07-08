@@ -1,6 +1,7 @@
 /* Styles for enhanced space background */
 body {
-  background-color: rgb(3, 0, 10) !important; /* Even darker for better contrast with galaxies */
+  background-color: rgb(3, 0, 10) !important; /* Dark for better contrast with galaxies */
+  min-height: 100vh; /* Ensure body covers entire viewport height */
 }
 
 /* Make sure content stays on top of the background */
@@ -12,20 +13,98 @@ body {
 /* Make text more readable against the animated background */
 p, li, h2, h3 {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  color: white;
 }
 
-/* Dark text gets a light shadow in dark mode */
-.dark-mode p, .dark-mode li, .dark-mode h2, .dark-mode h3 {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+/* Text styling for better readability in space theme */
+.project-details p, 
+.project-details li,
+.about-text p,
+.contact-container p {
+  color: #e0e0e0;
 }
 
 /* Ensure the space canvas stays behind everything */
 #space-background {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important; /* Use viewport width instead of percentage */
+  height: 100vh !important; /* Use viewport height instead of percentage */
+  z-index: -1 !important;
+  pointer-events: none !important;
+  transform: translate3d(0,0,0) !important; /* Force hardware acceleration */
+  backface-visibility: hidden !important; /* Prevent flickering on some mobile browsers */
+  perspective: 1000 !important; /* Additional optimization for fixed elements */
+  will-change: transform !important; /* Hint to browser that this element will change */
+}
+
+/* Fix for mobile scrolling issue */
+@media (max-width: 768px) {
+  html {
+    background-color: rgb(3, 0, 10) !important; /* Ensure background color matches even if canvas disappears */
+  }
+  
+  body {
+    position: relative;
+    min-height: 100vh;
+    background-color: transparent !important; /* Make body background transparent to show canvas */
+    overflow-x: hidden;
+  }
+  
+  /* Additional failsafe - add a pseudo-element as backup background if canvas fails */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(3, 0, 10);
+    z-index: -2;
+  }
+}
+
+/* Special styles for index page */
+body.index-page #space-background {
+  transition: all 0.5s ease;
+}
+
+.shooting-star {
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Add special glow effect to stars on index page */
+body.index-page .star-glow {
   position: fixed;
-  top: 0;
-  left: 0;
+  border-radius: 50%;
+  filter: blur(8px);
+  opacity: 0.4;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(106,13,173,0.2) 70%, rgba(0,0,0,0) 100%);
+  pointer-events: none;
+  z-index: -1;
+  animation: pulse 3s infinite alternate ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+}
+
+/* Special wrapper for index page to handle the rotation effect */
+body.index-page .space-wrapper {
+  position: fixed;
   width: 100%;
   height: 100%;
+  top: 0;
+  left: 0;
   z-index: -1;
-  pointer-events: none;
+  perspective: 1000px;
 }
