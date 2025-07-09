@@ -130,7 +130,7 @@ nav ul li a:hover:after{
   cursor: pointer;
 }
 .btn>i:hover{
-  color: #0032FF;
+  color: #b300ff;
 }
 .btn:hover{
   background: transparent;
@@ -490,13 +490,135 @@ content h1 {
     background-color: var(--primary-color);
     border-radius: 4px;
 }image-gallery {
-  scrollbar-color: var(--primary-color) rgba(0, 0, 0, 0.2);
-.image-gallery {}
-
-
-
-}  scrollbar-color: var(--primary-color) rgba(0, 0, 0, 0.2);
+.image-gallery {
+    /* For Firefox: uncomment the next line if you want to support it, but note limited browser support */
+    /* scrollbar-color: var(--primary-color) rgba(0, 0, 0, 0.2); */
+}
 
 .image-gallery::-webkit-scrollbar {
     width: 8px;
+}
+
+/* Certificate boxes link styling */
+.box a {
+  color: #d070db; /* Medium purple */
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.box a:hover {
+  color: var(--accent-color); /* Lavender on hover */
+  text-decoration: none;
+}
+
+/* Dark mode support for certificate box links */
+.dark-mode .box a {
+  color: #d070db; /* Keep medium purple in dark mode too */
+}
+
+.dark-mode .box a:hover {
+  color: var(--primary-color-light);
+}
+
+/* Licensing section styling in privacy policy */
+.policy-section.licensing-section {
+  margin-top: 40px;
+  padding: 30px;
+  background-color: rgba(40, 40, 40, 0.7) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid var(--primary-color-dark) !important;
+  display: block !important; /* Force display */
+  width: 80% !important;
+  max-width: 900px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.policy-section.licensing-section h2 {
+  color: var(--primary-color) !important;
+  font-size: 1.8rem !important;
+  margin-bottom: 20px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding-bottom: 10px !important;
+  text-align: left !important;
+}
+
+.policy-section.licensing-section > p {
+  color: #e0e0e0 !important;
+  margin-bottom: 20px !important;
+}
+
+.license-info {
+  margin-bottom: 25px !important;
+  padding: 20px !important;
+  background-color: rgba(70, 70, 70, 0.5) !important;
+  border-radius: 8px !important;
+  border-left: 4px solid var(--primary-color) !important;
+  display: block !important;
+}
+
+.license-info h3 {
+  color: var(--primary-color-light) !important;
+  font-size: 1.4rem !important;
+  margin-bottom: 15px !important;
+  text-align: left !important;
+}
+
+.license-info p {
+  margin-bottom: 12px !important;
+  line-height: 1.6 !important;
+  color: #e0e0e0 !important;
+  text-align: left !important;
+}
+
+.license-info a {
+  color: var(--primary-color-light) !important;
+  text-decoration: underline !important;
+  transition: color 0.3s ease !important;
+}
+
+.license-info a:hover {
+  color: var(--accent-color) !important;
+  text-decoration: none !important;
+}
+
+/* Dark mode adjustments for licensing section */
+.dark-mode .policy-section.licensing-section {
+  background-color: rgba(230, 230, 230, 0.7) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.dark-mode .policy-section.licensing-section h2 {
+  border-bottom-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.dark-mode .license-info {
+  background-color: rgba(200, 200, 200, 0.5) !important;
+}
+
+.dark-mode .license-info p,
+.dark-mode .policy-section.licensing-section > p {
+  color: #333 !important;
+}
+
+/* Mobile responsiveness for licensing section */
+@media screen and (max-width: 768px) {
+  .policy-section.licensing-section {
+    padding: 20px 15px !important;
+    margin-top: 30px !important;
+    width: 95% !important;
+  }
+  
+  .policy-section.licensing-section h2 {
+    font-size: 1.6rem !important;
+  }
+  
+  .license-info {
+    padding: 15px !important;
+  }
+  
+  .license-info h3 {
+    font-size: 1.3rem !important;
+  }
 }

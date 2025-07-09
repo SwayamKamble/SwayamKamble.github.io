@@ -1,6 +1,8 @@
 # 🚀 Swayam Kamble's Portfolio Website 
 
-![Portfolio Banner](images/logggg.png)
+<p align="center">
+  <img src="images/logggg.png" alt="Portfolio Banner" width="300"/>
+</p>
 
 ## 🌟 Overview
 
@@ -11,7 +13,6 @@ This is my personal portfolio website showcasing my projects, skills, and profes
 - 🌌 **Interactive Space Background** - Dynamic star field with animated galaxies and shooting stars
 - 🤖 **AI-Powered Chatbot** - Custom assistant to interact with visitors
 - 📱 **Fully Responsive Design** - Optimized for all devices from mobile to desktop
-- 🌙 **Dark/Light Mode** - Toggle between viewing preferences
 - 📁 **Project Showcase** - Detailed presentations of my technical projects
 - 📊 **Interactive Elements** - Engaging user experience with animations and transitions
 - 🔍 **SEO Optimized** - Enhanced discoverability through search engines
@@ -55,32 +56,9 @@ This is my personal portfolio website showcasing my projects, skills, and profes
   </tr>
   <tr>
     <td><img src="images/screenshot-about.png" alt="About Page" width="100%"/></td>
-    <td><img src="images/screenshot-contact.png" alt="Contact Page" width="100%"/></td>
+    <td><img src="images/screenshot-resume.png" alt="Resume Page" width="100%"/></td>
   </tr>
 </table>
-
-## 🚀 Setup and Installation
-
-1. **Clone the repository**
-   ```
-   git clone https://github.com/SwayamKamble/portfolio-website.git
-   ```
-
-2. **Navigate to the project directory**
-   ```
-   cd portfolio-website
-   ```
-
-3. **Open in browser**
-   - Simply open `index.html` in your preferred browser
-   - Alternatively, use a local development server like Live Server in VS Code
-
-## 🔮 Future Enhancements
-
-- ⚡ Server-side rendering for improved performance
-- 🌐 Multi-language support
-- 📊 Interactive project demonstrations
-- 📝 Blog section for technical articles
 
 ## 📞 Contact
 
@@ -90,7 +68,36 @@ This is my personal portfolio website showcasing my projects, skills, and profes
 
 ## ⚖️ License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project uses dual licensing to protect both code and content:
+
+### Code License - MIT
+
+All source code in this repository is licensed under the MIT License. This includes JavaScript files, CSS, and HTML structure.
+
+The MIT License allows you to:
+- Use the code commercially
+- Modify the code
+- Distribute the code
+- Use the code privately
+
+See [LICENSE-CODE.md](LICENSE-CODE.md) for the full MIT license text.
+
+### Content License - CC BY-NC-ND 4.0
+
+All non-code content in this repository is licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0). This includes:
+- Text content
+- Images and graphics
+- Project descriptions
+- Personal information
+- Design elements
+
+The CC BY-NC-ND 4.0 License means you can:
+- Share the content with attribution
+- Cannot use the content commercially
+- Cannot distribute modified versions
+- Cannot apply legal terms that legally restrict others from doing anything the license permits
+
+See [LICENSE-CONTENT.md](LICENSE-CONTENT.md) for the full content license details.
 
 ---
 

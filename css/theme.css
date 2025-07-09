@@ -81,3 +81,28 @@ nav ul li a:after,
 .video-container {
   border: 2px solid var(--primary-color);
 }
+
+/* Certificate links styling - Updated to ensure medium purple color */
+.certificates-section a, 
+.certificate-links a {
+  color: #9370DB; /* Medium purple */
+  transition: color 0.3s ease;
+  text-decoration: underline;
+}
+
+.certificates-section a:hover, 
+.certificate-links a:hover {
+  color: var(--accent-color); /* Lavender on hover */
+  text-decoration: none; /* Remove underline on hover */
+}
+
+/* For dark mode */
+.dark-mode .certificates-section a,
+.dark-mode .certificate-links a {
+  color: #9370DB; /* Keep medium purple in dark mode too */
+}
+
+.dark-mode .certificates-section a:hover,
+.dark-mode .certificate-links a:hover {
+  color: var(--primary-color-light); /* Lighter purple on hover in dark mode */
+}

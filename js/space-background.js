@@ -12,34 +12,32 @@ class SpaceBackground {
     this.lastShootingStarTime = 0;
     this.isMobile = window.innerWidth <= 768;
     this.rotation = 0;
-    this.rotationSpeed = 0.0003; // Increased speed for more noticeable effect
+    this.rotationSpeed = 0.0001; // Increased speed for more noticeable effect
     this.isIndexPage = this.checkIfIndexPage();
-    
-    this.astronaut = {
-      x: 0,
-      y: 0,
-      size: this.isMobile ? 30 : 40,
-      angle: 0,
-      speed: 0.5,
-      orbit: this.isMobile ? 100 : 150,
-      centerX: 0,
-      centerY: 0,
-      img: new Image()
-    };
-    
+        
     // Replace the fixed interval with a more random approach
-    this.shootingStarInterval = 200 + Math.random() * 800; // Random interval between 200-1000ms
+    this.shootingStarInterval = 2000 + Math.random() * 3000; // Increased interval (2-5 seconds between stars)
     
     // Create a shooting star with dynamic timing
     setInterval(() => {
       const now = Date.now();
-      if (now - this.lastShootingStarTime > this.shootingStarInterval && this.shootingStars.length < 10) {
+      if (now - this.lastShootingStarTime > this.shootingStarInterval && this.shootingStars.length < 3) { // Reduced max stars from 10 to 3
         this.createShootingStar();
         this.lastShootingStarTime = now;
         // Set a new random interval for next star
-        this.shootingStarInterval = 200 + Math.random() * 1500;
+        this.shootingStarInterval = 3000 + Math.random() * 5000; // Longer interval (3-8 seconds)
       }
-    }, 100); // Check more frequently, but create based on dynamic interval
+    }, 100); // Check frequency remains the same
+    
+    // Add frame counter and star regeneration interval
+    this.frameCount = 0;
+    this.starRegenerationInterval = 60; // Regenerate stars every 60 frames
+    
+    // Add extended star field properties
+    this.starFieldWidth = window.innerWidth * 3; // Create a star field 3x wider than the viewport
+    this.starFieldHeight = window.innerHeight * 3; // Create a star field 3x taller than the viewport
+    this.starFieldOffsetX = -window.innerWidth; // Center the star field
+    this.starFieldOffsetY = -window.innerHeight; // Center the star field
     
     this.init();
   }
@@ -105,7 +103,7 @@ class SpaceBackground {
     setInterval(() => this.ensureCanvasVisible(), 2000);
     
     // Create stars
-    this.createStars(this.isMobile ? 100 : 100);
+    this.createStars(this.isMobile ? 100 : 300);
     
     // Create comets
     this.createComets(this.isMobile ? 2 : 3);
@@ -114,12 +112,7 @@ class SpaceBackground {
     this.createGalaxies(this.isMobile ? 2 : 3);
     
     // Create nebulas (new)
-    this.createNebulas(this.isMobile ? 2 : 4);
-    
-    // Set up astronaut
-    this.astronaut.img.src = 'images/astronaut.png';
-    this.astronaut.centerX = window.innerWidth * 0.8;
-    this.astronaut.centerY = window.innerHeight * 0.7;
+    this.createNebulas(this.isMobile ? 1 : 2);
     
     // Start animation
     this.animate();
@@ -155,7 +148,7 @@ class SpaceBackground {
     this.drawStars();
     this.drawComets();
     this.drawShootingStars();
-    this.drawAstronaut();
+    //this.drawAstronaut();
   }
   
   // Add a new method to ensure canvas is visible
@@ -208,10 +201,6 @@ class SpaceBackground {
     const viewportHeight = window.innerHeight;
     const viewportWidth = window.innerWidth;
     
-    // Ensure astronaut stays in visible area
-    this.astronaut.centerX = viewportWidth * 0.8;
-    this.astronaut.centerY = viewportHeight * 0.7;
-    
     // Ensure some galaxies and nebulas are always in the viewport
     this.ensureVisibleElements();
   }
@@ -256,10 +245,11 @@ class SpaceBackground {
   
   createStars(count) {
     this.stars = [];
-    for (let i = 0; i < count; i++) {
+    // Create stars spread across a much larger area than just the visible canvas
+    for (let i = 0; i < count * 3; i++) { // Generate 3x more stars to fill the larger area
       this.stars.push({
-        x: Math.random() * this.canvas.width,
-        y: Math.random() * this.canvas.height,
+        x: Math.random() * this.starFieldWidth + this.starFieldOffsetX,
+        y: Math.random() * this.starFieldHeight + this.starFieldOffsetY,
         size: Math.random() * 2 + 0.5,
         opacity: Math.random() * 0.8 + 0.2,
         twinkleSpeed: Math.random() * 0.03 + 0.01,
@@ -412,6 +402,9 @@ class SpaceBackground {
           brightness *= 0.6 + Math.abs(Math.sin(Date.now() * star.flickerRate)) * 0.4;
         }
         
+        // Parse the star's color to use in the gradient - DEFINE rgbColor HERE
+        const rgbColor = this.hexToRgb(star.color || '#FFFFFF');
+        
         // Draw trail with smoother gradient
         if (star.trailPoints.length > 1) {
           // Create gradient for trail
@@ -528,7 +521,7 @@ class SpaceBackground {
       this.galaxies.push({
         x: Math.random() * this.canvas.width,
         y: Math.random() * this.canvas.height,
-        size: Math.random() * (this.isMobile ? 200 : 300) + (this.isMobile ? 150 : 200), // Smaller on mobile
+        size: Math.random() * (this.isMobile ? 100 : 150) + (this.isMobile ? 80 : 100), // Smaller galaxies
         rotation: Math.random() * Math.PI * 2,
         coreColor: coreColors[Math.floor(Math.random() * coreColors.length)],
         dustColor: dustColors[Math.floor(Math.random() * dustColors.length)],
@@ -559,7 +552,7 @@ class SpaceBackground {
     
     for (let i = 0; i < count; i++) {
       const colorSet = nebulaColors[Math.floor(Math.random() * nebulaColors.length)];
-      const size = Math.random() * (this.isMobile ? 300 : 400) + (this.isMobile ? 200 : 300); // Smaller on mobile
+      const size = Math.random() * (this.isMobile ? 150 : 200) + (this.isMobile ? 100 : 150); // Smaller nebulas
       
       this.nebulas.push({
         x: Math.random() * this.canvas.width,
@@ -598,6 +591,15 @@ class SpaceBackground {
   
   drawStars() {
     this.ctx.save();
+    
+    // Increment frame counter
+    this.frameCount++;
+    
+    // Periodically regenerate some stars to ensure good distribution after rotation
+    if (this.frameCount % this.starRegenerationInterval === 0) {
+      this.regenerateStars();
+    }
+    
     for (const star of this.stars) {
       // Update twinkle
       star.twinklePhase += star.twinkleSpeed;
@@ -610,6 +612,39 @@ class SpaceBackground {
       this.ctx.fill();
     }
     this.ctx.restore();
+  }
+  
+  // Replace the regenerateStars method with this improved version
+  regenerateStars() {
+    // Keep track of rotation-adjusted boundaries
+    const centerX = this.canvas.width / 2;
+    const centerY = this.canvas.height / 2;
+    const maxDistance = Math.sqrt(Math.pow(this.starFieldWidth, 2) + Math.pow(this.starFieldHeight, 2)) / 2;
+    
+    // Check each star and regenerate only those that are completely out of the extended field
+    for (let i = 0; i < this.stars.length; i++) {
+      const star = this.stars[i];
+      
+      // Calculate star's distance from center after rotation
+      const dx = star.x - centerX;
+      const dy = star.y - centerY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      // If star is too far from center (outside our extended field), regenerate it
+      if (distance > maxDistance) {
+        // Generate a new star near the opposite edge to maintain star density
+        const angle = Math.atan2(dy, dx) + Math.PI; // Opposite direction
+        const newDistance = maxDistance * 0.8 * Math.random(); // 80% of max distance
+        
+        star.x = centerX + Math.cos(angle) * newDistance;
+        star.y = centerY + Math.sin(angle) * newDistance;
+        star.size = Math.random() * 2 + 0.5;
+        star.opacity = Math.random() * 0.8 + 0.2;
+        star.twinkleSpeed = Math.random() * 0.03 + 0.01;
+        star.twinklePhase = Math.random() * Math.PI * 2;
+        star.color = Math.random() > 0.9 ? this.getRandomStarColor() : '#FFFFFF';
+      }
+    }
   }
   
   drawComets() {
@@ -766,20 +801,6 @@ class SpaceBackground {
       this.ctx.ellipse(0, 0, galaxy.size * 0.25, galaxy.size * 0.25 * galaxy.ellipticity, 0, 0, Math.PI * 2);
       this.ctx.fill();
       
-      // Add some random stars in the galaxy
-      this.ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-      for (let i = 0; i < 30; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const distance = Math.random() * galaxy.size * 0.6;
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance * galaxy.ellipticity;
-        const size = Math.random() * 1.5 + 0.5;
-        
-        this.ctx.beginPath();
-        this.ctx.arc(x, y, size, 0, Math.PI * 2);
-        this.ctx.fill();
-      }
-      
       this.ctx.restore();
       
       // Reset transformations
@@ -853,54 +874,59 @@ class SpaceBackground {
       this.ctx.globalCompositeOperation = 'screen';
       this.ctx.fill();
       
-      // Add some stars inside the nebula
-      this.ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-      this.ctx.globalCompositeOperation = 'source-over';
-      
-      for (let i = 0; i < 15; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const distance = Math.random() * nebula.size * 0.3;
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance;
-        const starSize = Math.random() * 1.5 + 0.5;
-        
-        this.ctx.beginPath();
-        this.ctx.arc(x, y, starSize, 0, Math.PI * 2);
-        this.ctx.fill();
-      }
-      
       // Reset transformations
       this.ctx.resetTransform();
     }
     
     this.ctx.restore();
   }
-  
-  drawAstronaut() {
-    if (!this.astronaut.img.complete) return;
     
-    this.ctx.save();
+  adjustForDeviceType() {
+    // Adjust settings based on device type
+    if (this.isMobile) {
+      // Reduce elements for mobile
+      while (this.stars.length > 100 * 3) {
+        this.stars.pop();
+      }
+      
+      while (this.galaxies.length > 2) {
+        this.galaxies.pop();
+      }
+      
+      while (this.nebulas.length > 1) {
+        this.nebulas.pop();
+      }
+    } else {
+      // Add more elements for desktop if needed
+      if (this.stars.length < 300 * 3) {
+        const additionalStars = (300 * 3) - this.stars.length;
+        for (let i = 0; i < additionalStars; i++) {
+          this.stars.push({
+            x: Math.random() * this.starFieldWidth + this.starFieldOffsetX,
+            y: Math.random() * this.starFieldHeight + this.starFieldOffsetY,
+            size: Math.random() * 2 + 0.5,
+            opacity: Math.random() * 0.8 + 0.2,
+            twinkleSpeed: Math.random() * 0.03 + 0.01,
+            twinklePhase: Math.random() * Math.PI * 2,
+            color: Math.random() > 0.9 ? this.getRandomStarColor() : '#FFFFFF'
+          });
+        }
+      }
+      
+      if (this.galaxies.length < 3) {
+        this.createGalaxies(3 - this.galaxies.length);
+      }
+      
+      if (this.nebulas.length < 2) {
+        this.createNebulas(2 - this.nebulas.length);
+      }
+    }
     
-    // Update astronaut position
-    this.astronaut.angle += 0.01;
-    this.astronaut.x = this.astronaut.centerX + Math.cos(this.astronaut.angle) * this.astronaut.orbit;
-    this.astronaut.y = this.astronaut.centerY + Math.sin(this.astronaut.angle) * this.astronaut.orbit * 0.5;
+    // Reposition elements after adjustment
+    this.repositionElements();
     
-    // Add slight floating motion
-    const floatOffset = Math.sin(this.astronaut.angle * 2) * 5;
-    
-    // Draw astronaut
-    this.ctx.translate(this.astronaut.x, this.astronaut.y + floatOffset);
-    this.ctx.rotate(Math.sin(this.astronaut.angle) * 0.2);
-    this.ctx.drawImage(
-      this.astronaut.img, 
-      -this.astronaut.size / 2, 
-      -this.astronaut.size / 2, 
-      this.astronaut.size, 
-      this.astronaut.size
-    );
-    
-    this.ctx.restore();
+    // Force a redraw
+    this.forceRedraw();
   }
   
   animate() {
@@ -910,6 +936,12 @@ class SpaceBackground {
     // Apply rotation from right-bottom corner
     if (this.isIndexPage) {
       this.rotation += this.rotationSpeed;
+      
+      // Check if we need to regenerate stars (do this less frequently)
+      this.frameCount++;
+      if (this.frameCount % 120 === 0) { // Reduced frequency (every 120 frames)
+        this.regenerateStars();
+      }
       
       this.ctx.save();
       // Set the rotation point to the right-bottom corner
@@ -927,7 +959,7 @@ class SpaceBackground {
       // Draw non-rotating elements
       this.drawComets();     
       this.drawShootingStars(); // Shooting stars always visible
-      this.drawAstronaut();  
+      
     } else {
       // Normal drawing for non-index pages
       this.drawNebulas();    
@@ -935,7 +967,6 @@ class SpaceBackground {
       this.drawStars();      
       this.drawComets();
       this.drawShootingStars(); // Add shooting stars to all pages
-      this.drawAstronaut();  
     }
     
     // Continue animation
