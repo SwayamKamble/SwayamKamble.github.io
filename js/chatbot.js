@@ -425,7 +425,7 @@ class ChatBot {
   
   async sendToAPI(question) {
     try {
-      const response = await fetch('https://portfolio-backend-jqfj.onrender.com/chat', {
+      const response = await fetch('https://portfolio-backend-805a.onrender.com/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
