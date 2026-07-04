@@ -577,7 +577,7 @@
 
     <script src="js/space-background.js"></script>
     <script src="js/chatbot.js"></script>
-    <script>
+        <script>
         function submitForm() {
             // Check if privacy checkbox is checked
             if (!document.getElementById('privacy-checkbox').checked) {
@@ -586,13 +586,15 @@
             }
             
             var formData = new FormData(document.getElementById('contactForm'));
-
-            fetch('https://script.google.com/macros/s/AKfycbyPXC7WTG2e9wnQ4PQLHyjp_-zOYFTEC3YfjQTnIM5KG3csl6JW4UULwZ4WscRQkMkO/exec', {
+    
+            // Updated fetch request to fix the CORS issue
+            fetch('https://script.google.com/macros/s/AKfycbznBb2-qqPt5OaPxDoMrUMK_Obgf0ZdkQXIZ3Xv7tqxSNKC-P6_0FjyIKA636VlT6WJ/exec', {
                 method: 'POST',
+                mode: 'no-cors', // This is required to allow the request to go through
                 body: formData
             })
-            .then(response => response.text())
-            .then(data => {
+            .then(() => {
+                // Because of no-cors, we can't read the response text, so we assume success
                 alert("Message Sent!");
                 document.getElementById('contactForm').reset();
             })
@@ -601,21 +603,21 @@
                 console.error(error);
             });
         }
-
+    
         function myfun() {
             var x = document.getElementById("x");
             document.getElementById("bar2").style.display = "block";
             document.getElementById("bar").style.display = "none";
             x.style.display = "flex";
         }
-
+    
         function closefunc() {
             var x = document.getElementById("x");
             document.getElementById("bar").style.display = "block";
             document.getElementById("bar2").style.display = "none";
             x.style.display = "none";
         }
-
+    
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.querySelector('.menu-toggle');
             const navMenu = document.getElementById('nav-menu');
